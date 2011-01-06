@@ -280,7 +280,7 @@ class CampaignMonitor {
 		$cache_location = $this->generate_cache_location($methodname);
 		
 		// Check if the file exists and is within the cache length
-		if(file_exists($cache_location) && filemtime($cache_location) < (time() + $this->get_cache_length())) {
+		if(file_exists($cache_location) && (filemtime($cache_location) + $this->get_cache_length()) > time()) {
 			return unserialize(file_get_contents($cache_location));
 		} else {
 			return false;
